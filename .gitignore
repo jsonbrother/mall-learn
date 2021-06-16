@@ -1,0 +1,14 @@
+.idea
+.svn
+*.iml
+.DS_Store
+.project
+.classpath
+.factorypath
+.vscode
+.settings/
+target/
+out/
+mall-learn.iml
+mall-learn.ipr
+mall-learn.iws
