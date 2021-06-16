@@ -7,6 +7,7 @@ import com.priv.model.vo.ChannelFileDetailVo;
 import com.priv.service.report.IChannelFlowService;
 import com.priv.service.report.common.ChannelFileConsumer;
 import com.priv.service.report.common.ChannelFileProducer;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,10 @@ import java.util.concurrent.*;
  * @date 2021/6/4 15:29
  */
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ChannelFlowService implements IChannelFlowService {
 
-    @Autowired
-    private ThreadPoolConfig threadPoolConfig;
+    private final ThreadPoolConfig threadPoolConfig;
 
     private static Logger logger = LoggerFactory.getLogger(ChannelFlowService.class);
     private static final List<String> columns = new ArrayList<>();

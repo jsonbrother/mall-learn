@@ -5,6 +5,7 @@ import com.priv.facade.report.IChannelFlowFacade;
 import com.priv.model.dto.ChannelFileAnalyseDTO;
 import com.priv.model.dto.ChannelFileImportDTO;
 import com.priv.service.report.IChannelFlowService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,16 +18,11 @@ import java.util.Set;
  * @date 2021/6/7 13:42
  */
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ChannelFlowFacadeImpl implements IChannelFlowFacade {
 
     private final IChannelFlowService channelFlowService;
     private final FileConfig fileConfig;
-
-    @Autowired
-    public ChannelFlowFacadeImpl(IChannelFlowService channelFlowService, FileConfig fileConfig) {
-        this.channelFlowService = channelFlowService;
-        this.fileConfig = fileConfig;
-    }
 
     @Override
     public void importChannelFile(ChannelFileImportDTO channelFileImportDTO) {

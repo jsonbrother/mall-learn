@@ -1,16 +1,19 @@
 package com.priv.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import com.priv.config.FileConfig;
 import com.priv.facade.report.IChannelFlowFacade;
 import com.priv.model.bo.ChannelFileImportBO;
 import com.priv.model.dto.ChannelFileImportDTO;
 import com.priv.model.MallLearnModel;
 import com.priv.model.vo.ChannelFlowVo;
 import com.priv.view.MallExcel2007View;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +23,11 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/channel")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ChannelFlowController {
 
-    @Autowired
-    private IChannelFlowFacade iChannelFlowFacade;
+    private final IChannelFlowFacade iChannelFlowFacade;
+    private final FileConfig fileConfig;
 
     @PostMapping("/import")
     @ResponseBody
@@ -37,7 +41,7 @@ public class ChannelFlowController {
     @GetMapping("/export")
     public ModelAndView doExportChannelFile() {
         MallExcel2007View view = new MallExcel2007View();
-        view.setPath("E:\\tmp\\mall-file\\template\\模拟报表.xlsx");
+        view.setPath(fileConfig.getFilePath() + File.separator + "\\template\\模拟报表.xlsx");
 
         MallLearnModel dataDTO = new MallLearnModel();
         List<ChannelFlowVo> channelFlowVos = simulationData();
