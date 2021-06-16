@@ -9,6 +9,7 @@ import com.priv.service.report.common.ChannelFileConsumer;
 import com.priv.service.report.common.ChannelFileProducer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,7 +26,7 @@ import java.util.concurrent.*;
 @Service
 public class ChannelFlowService implements IChannelFlowService {
 
-    @Resource
+    @Autowired
     private ThreadPoolConfig threadPoolConfig;
 
     private static Logger logger = LoggerFactory.getLogger(ChannelFlowService.class);

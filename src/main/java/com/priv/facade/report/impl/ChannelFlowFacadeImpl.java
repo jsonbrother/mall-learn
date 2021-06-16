@@ -1,5 +1,6 @@
 package com.priv.facade.report.impl;
 
+import com.priv.config.FileConfig;
 import com.priv.facade.report.IChannelFlowFacade;
 import com.priv.model.dto.ChannelFileAnalyseDTO;
 import com.priv.model.dto.ChannelFileImportDTO;
@@ -8,11 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,10 +19,14 @@ import java.util.Set;
 @Service
 public class ChannelFlowFacadeImpl implements IChannelFlowFacade {
 
-    @Autowired
-    private IChannelFlowService channelFlowService;
+    private final IChannelFlowService channelFlowService;
+    private final FileConfig fileConfig;
 
-    private final static String PATH_PREFIX = "E:\\tmp\\mall-file";
+    @Autowired
+    public ChannelFlowFacadeImpl(IChannelFlowService channelFlowService, FileConfig fileConfig) {
+        this.channelFlowService = channelFlowService;
+        this.fileConfig = fileConfig;
+    }
 
     @Override
     public void importChannelFile(ChannelFileImportDTO channelFileImportDTO) {
@@ -35,7 +35,7 @@ public class ChannelFlowFacadeImpl implements IChannelFlowFacade {
         // 文件存放路径
         String departId = channelFileImportDTO.getDepartId();
         String workDate = channelFileImportDTO.getWorkDate();
-        String filePath = PATH_PREFIX + File.separator + departId + File.separator + workDate;
+        String filePath = fileConfig.getFilePath() + File.separator + departId + File.separator + workDate;
         channelFileAnalyseDTO.setFilePath(filePath);
 
         // 导入的文件名称
